@@ -19,7 +19,33 @@ Internal Reference komandos:
 • Vidaus valdymo (pvz. EIS – Enable Interrupt System, CLRC – Clear Carry Bit)
 • Jump komandos (pvz. JSR – Jump and Save Return Address, JD – Jump to Address).
 • Steko komandos (pvz. PULR – fetch top element, PSHR – push element)
-Iš viso apraše minimos 87 komandos (General Instrument Corporation Microelectronics, 1975, p. 7, 42 – 58, 62).Abiejose architektūrose didžioji dalis komandų sutampa, tačiau MOS 6502 komandos dažnu atveju skirtos specifiniams registrams (pvz. akumuliatoriaus, indeksų X arba Y registrams), o CP1600 komandos - bendros paskirtiems registrams. CP1600 architektūra turi daugiau skirtingų sąlygų Jump ir Branch komandoms. Vidaus valdymo, aritmetinių operacijų komandos abiejose architektūrose panašios.  
+Iš viso apraše minimos 87 komandos (General Instrument Corporation Microelectronics, 1975, p. 7, 42 – 58, 62).Abiejose architektūrose didžioji dalis komandų sutampa, tačiau MOS 6502 komandos dažnu atveju skirtos specifiniams registrams (pvz. akumuliatoriaus, indeksų X arba Y registrams), o CP1600 komandos - bendros paskirtiems registrams. CP1600 architektūra turi daugiau skirtingų sąlygų Jump ir Branch komandoms. Vidaus valdymo, aritmetinių operacijų komandos abiejose architektūrose panašios. Adresavimo būdaiMOS 6502 architektūros adresavimo būdai skirstomi į tris kategorijas.
+ Neindeksiniai adresavimo būdai: 
+• implied addresing – tik operacijos kodo baitas; 
+• betarpiškas – dviejų baitų instrukcija, pirmasis baitas – operacijos kodas, o antrasis baitas – konstanta, 
+• absoliutus adresavimas – pirmas baitas – operacijos kodas, antrasis baitas – žemesnieji efektyvaus adreso bitai, o trečias baitas – aukštesnieji efektyvaus adreso bitai;
+• nulinio puslapio adresavimas – viename baite operacijos kodas, o kitame efektyvus adresas nuliniame atminties (adresų erdvės) puslapyje; 
+• reliatyvus adresavimas – operacijos kodas ir postūmis nuo dabartinio adreso (offset).
+Indeksiniai adresavimo būdai:
+• absoliutus indeksinis – prie absoliutaus adreso pridedamas indekso registras;
+• nulinio puslapio indeksinis – nulinio puslapio adresas modifikuojamas indekso registro.
+Netiesioginio adresavimo būdai (naudojamas nulinio puslapio adresas prieiti efektyviam adresui):
+• netiesioginis – prie operacijos kodo pateikiamas efektyvaus adreso adresas;
+• indeksinis netiesioginis adresavimas – prie nulinio puslapio adreso pridedamas indekso registro X turinys, kad gautume rodyklę;
+• netiesioginis indeksinis adresavimas – prie nulinio puslapio adrese esančio adreso pridedamas Y registro turinys;
+• netiesioginis absoliutus – naudojamas netiesioginėms jmp operacijoms
+(Mos TECHNOLOGY INC, 1976, MCS6500 Microcomputer Family Programming Manual p. 50, 57-63, 79 - 92).  CP1600 prie keturių bitų operacijos kodo nurodo trijų bitų adresavimo režimo bitą:
+• 0 režimas – nurodyto adreso turinys naudojamas kaip „išorinis“ adresas;
+• 1, 2 ir  3 režimai – atitinkamai šie registrai saugo „išorinį“ adresą (netiesioginis adresavimas);
+• 4 ir 5 režimai - netiesioginis adresavimas naudojantis 4 ir 5 registrais – po operacijos šių registrų turinys inkrementuojamas;
+• 6 režimas - adresavimas stekui naudojantis 6 registru (su inkrementavimu ir dekrementavimu);
+• 7 režimas – betarpiškas adresavimas.
+Kitu atveju prie operacijos kodo gali būti nurodomas ne režimas, o priklausomai nuo operacijos:
+• duomenų šaltinio ir gavėjo registrai – dirbama su registrų turiniu;
+• Branch operacijos – nurodomas postūmis, kurį reikia pridėti prie programos skaitliuko;
+• perduodamas tik šaltinio registras;
+• neperduodamas joks adresas ar registras (atitiktų MOS 6502 implied addresing).
+(General Instrument Corporation Microelectronics, 1975, p. 46 – 58).Pagrindiniai adresavimo principai abiejose architektūrose panašūs (tiesioginis, netiesioginis, betarpiškas, reliatyvus ir implied tipo). MOS 6502 architektūra turi daug adresavimo tipų susijusių su nuliniu adresų erdvės puslapiu, ko nėra CP1600 architektūroje. Tačiau pastaroji architektūra turi nemažai adresavimo režimų susietų su konkrečiais registrais (pvz. 4 ir 5 registrų inkrementavimas gauti netiesioginiam adresui). 
 https://en.wikipedia.org/wiki/Integrated_circuit#Large-scale_integration_(LSI)
 https://en.wikipedia.org/wiki/General_Instrument_CP1600
 https://en.wikipedia.org/wiki/MOS_Technology_6502#Design_notes
